@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { options } from './utils/data';
 import uuid from 'react-uuid';
 const Form = () => {
+
+    const [selectedValue, setSelectedValue] = useState(null)
+ 
+    const handleFormSubmit = e => {
+        e.preventDefault();
+        console.log(e.target.name.value)
+        console.log(selectedValue)
+    }
+
 
     return (
         <div className=''>
@@ -9,16 +18,18 @@ const Form = () => {
                 <h1 className='text-2xl font-bold'>Please enter your name and pick the Sectors you are currently involved in.</h1>
             </div>
             <div className='border-2 w-[70%] mx-auto mt-10 border-indigo-300 py-20 px-7 flex justify-center items-center'>
-                <form >
+                <form onSubmit={handleFormSubmit}>
                     <div className='flex items-center gap-5 justify-between'>
                         <label htmlFor="name">Name <span>:</span></label>
                         <input id='name' type="text" placeholder="Type here" className="input input-bordered input-md w-[83%]" />
                     </div>
                     <div className='flex items-center gap-5 justify-between mt-7'>
                         <label htmlFor="select">Selectors   <span>:</span></label>
-                        <select style={{
-                            fontWeight: 'bold'
-                        }} id='select ' className='py-3 px-2 rounded-xl cursor-pointer'>
+                        <select
+                            onChange={e => setSelectedValue(e.target.value)}
+                            style={{
+                                fontWeight: 'bold'
+                            }} id='select ' className='py-3 px-2 rounded-xl cursor-pointer'>
                             {
                                 options.map((opt) => {
 
@@ -70,7 +81,7 @@ const Form = () => {
                     <div className='w-[130px] mt-6' >
                         <div className="form-control">
                             <label className="label cursor-pointer">
-                                <input type="checkbox" className="checkbox" />
+                                <input required type="checkbox" className="checkbox" />
                                 <span className="label-text">Agree to terms</span>
                             </label>
                         </div>
