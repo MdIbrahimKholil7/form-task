@@ -54,7 +54,7 @@ const Form = () => {
             <div>
                 <h1 className='text-xl md:text-2xl font-bold text-center'>Please enter your name and pick the Sectors you are currently involved in.</h1>
             </div>
-            <div className='border-2 w-full md:w-[70%] mx-auto mt-10 border-indigo-300 py-20 px-7 flex justify-center items-center px-2'>
+            <div className='border-2 w-full md:w-[70%] mx-auto mt-10 border-indigo-300 py-20  flex justify-center items-center px-2 rounded-xl'>
                 <form onSubmit={handleFormSubmit}>
                     <div className='flex-col flex lg:flex-row items-start md:items-center gap-5 justify-between'>
                         <label htmlFor="name">Name <span>:</span></label>
