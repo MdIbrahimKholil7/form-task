@@ -50,30 +50,30 @@ const Form = () => {
 
 
     return (
-        <div className=''>
+        <div>
             <div>
-                <h1 className='text-2xl font-bold'>Please enter your name and pick the Sectors you are currently involved in.</h1>
+                <h1 className='text-xl md:text-2xl font-bold text-center'>Please enter your name and pick the Sectors you are currently involved in.</h1>
             </div>
-            <div className='border-2 w-[70%] mx-auto mt-10 border-indigo-300 py-20 px-7 flex justify-center items-center'>
+            <div className='border-2 w-full md:w-[70%] mx-auto mt-10 border-indigo-300 py-20 px-7 flex justify-center items-center px-2'>
                 <form onSubmit={handleFormSubmit}>
-                    <div className='flex items-center gap-5 justify-between'>
+                    <div className='flex-col flex lg:flex-row items-start md:items-center gap-5 justify-between'>
                         <label htmlFor="name">Name <span>:</span></label>
                         <input id='name' type="text" placeholder="Type here" className="input input-bordered input-md w-[83%]" />
 
                     </div>
                     {
                         error.nameValue &&
-                        <div className='text-red-500 py-3 text-[13px] mb-2'>
+                        <div className='text-red-500 py-3 text-[13px] mb-2 text-center'>
                             {error.nameValue}
                         </div>
                     }
-                    <div className='flex items-center gap-5 justify-between mt-7'>
+                    <div className='flex-col flex lg:flex-row items-start md:items-center gap-5 justify-start md:justify-between mt-7'>
                         <label htmlFor="select">Selectors   <span>:</span></label>
                         <select
                             onChange={e => setSelectedValue(e.target.value)}
                             style={{
                                 fontWeight: 'bold'
-                            }} id='select ' className='py-3 px-1 rounded-xl cursor-pointer' value={selectedValue}>
+                            }} id='select ' className='py-3 px-1 rounded-xl cursor-pointer w-[300px] md-w-full' value={selectedValue}>
                             {
                                 options.map((opt) => {
 
@@ -125,7 +125,7 @@ const Form = () => {
                     </div>
                     {
                         error.selectedValue &&
-                        <div className='text-red-500 py-3 text-[13px] mb-2'>
+                        <div className='text-red-500 py-3 text-[13px] mb-2 text-center'>
                             {error.selectedValue}
                         </div>
                     }
@@ -137,7 +137,7 @@ const Form = () => {
                             </label>
                         </div>
                     </div>
-                    <div className='mt-10'>
+                    <div className='mt-10 text-center'>
                         <button className='btn text-white  bg-[#5b5c5b]'>Save</button>
                     </div>
                 </form>
