@@ -3,12 +3,49 @@ import { options } from './utils/data';
 import uuid from 'react-uuid';
 const Form = () => {
 
-    const [selectedValue, setSelectedValue] = useState(null)
- 
+    const [selectedValue, setSelectedValue] = useState('')
+    const [error, setError] = useState({})
+
+
     const handleFormSubmit = e => {
         e.preventDefault();
-        console.log(e.target.name.value)
-        console.log(selectedValue)
+
+        if (!selectedValue && !e.target.name.value) {
+            return setError({
+                selectedValue: "Please select a value",
+                nameValue: "Please enter a name"
+            })
+        }
+        if (!e.target.name.value) {
+            return setError({
+                nameValue: "Please enter a name"
+            })
+        }
+        if (!selectedValue) {
+            return setError({
+                selectedValue: "Please select a value",
+            })
+        }
+
+        setError({
+            selectedValue: "",
+            nameValue: ""
+        })
+        const obj = {
+            optionName: e.target.name.value,
+            subOptions: [
+                {
+                    name: selectedValue,
+
+                },
+
+            ],
+            agreeTerms: true
+        }
+
+        options.push(obj)
+        e.target.reset()
+
     }
 
 
@@ -22,14 +59,21 @@ const Form = () => {
                     <div className='flex items-center gap-5 justify-between'>
                         <label htmlFor="name">Name <span>:</span></label>
                         <input id='name' type="text" placeholder="Type here" className="input input-bordered input-md w-[83%]" />
+
                     </div>
+                    {
+                        error.nameValue &&
+                        <div className='text-red-500 py-3 text-[13px] mb-2'>
+                            {error.nameValue}
+                        </div>
+                    }
                     <div className='flex items-center gap-5 justify-between mt-7'>
                         <label htmlFor="select">Selectors   <span>:</span></label>
                         <select
                             onChange={e => setSelectedValue(e.target.value)}
                             style={{
                                 fontWeight: 'bold'
-                            }} id='select ' className='py-3 px-2 rounded-xl cursor-pointer'>
+                            }} id='select ' className='py-3 px-1 rounded-xl cursor-pointer' value={selectedValue}>
                             {
                                 options.map((opt) => {
 
@@ -53,6 +97,7 @@ const Form = () => {
                                                                         <option key={uuid()} value={opti?.name}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{opti?.name}</option>
                                                                         {
                                                                             opti?.subCategoryChild?.subCatChildName && <option
+                                                                                key={uuid()}
                                                                                 disabled={true} value={opti?.subCategoryChild?.subCatChildName}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{opti?.subCategoryChild?.subCatChildName}</option>
                                                                         }
                                                                         {
@@ -78,6 +123,12 @@ const Form = () => {
                             }
                         </select>
                     </div>
+                    {
+                        error.selectedValue &&
+                        <div className='text-red-500 py-3 text-[13px] mb-2'>
+                            {error.selectedValue}
+                        </div>
+                    }
                     <div className='w-[130px] mt-6' >
                         <div className="form-control">
                             <label className="label cursor-pointer">
