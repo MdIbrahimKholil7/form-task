@@ -58,7 +58,7 @@ const Form = () => {
                 <form onSubmit={handleFormSubmit}>
                     <div className='flex-col flex lg:flex-row items-start md:items-center gap-5 justify-between'>
                         <label htmlFor="name">Name <span>:</span></label>
-                        <input id='name' type="text" placeholder="Type here" className="input input-bordered input-md w-[83%]" />
+                        <input id='name' type="text" placeholder="Type here" className="input input-bordered input-md w-[100%] md:w-[77%]" />
 
                     </div>
                     {
